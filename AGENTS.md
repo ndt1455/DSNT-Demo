@@ -124,6 +124,7 @@ Routes (keep in sync with `src/config/screens.ts`):
 - Styling: Tailwind classes + `cn()` for conditionals. No CSS modules, no inline `style` except for truly dynamic values.
 - UI code gets data **only** through `@/lib/mock` (later swappable for `@/lib/api`). No `fetch` in components.
 - Navigation between journey screens: `next/link` or `useRouter().push`. Guard screens that need earlier data (e.g. OTP without a phone) by redirecting back.
+- Flow 1 and Flow 2 are one journey (`/splash` → … → `/verify/otp/success` → `/verify/id` → … → `/verify/done`): `/splash` resets the application store, and Flow 2 screens require `otpVerified` (`useRequiredStep` / `StepGuard` in `features/identity`).
 - Keep it simple: MVP quality, readable over clever. No premature abstractions, no unused code, no commented-out code.
 - Comments explain _why_, not _what_.
 

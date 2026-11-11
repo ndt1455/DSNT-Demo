@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
+import { buttonClasses } from "@/components/ui/Button";
 import { FLOWS, figmaUrl, type ScreenStatus } from "@/config/screens";
+import { MOCK_OTP_CODE, MOCK_PROMO_CODE } from "@/lib/mock";
 import { cn } from "@/lib/utils/cn";
 
 /**
@@ -31,6 +33,17 @@ export default function Home() {
           {done}/{total} screens built. Tap a screen to open it.
         </p>
       </header>
+
+      <div className="flex flex-col gap-3">
+        <Link href="/splash" className={buttonClasses()}>
+          Start the full journey
+        </Link>
+        <p className="text-p-xs text-gray-10">
+          Flow 1 → Flow 2 in one run, starting fresh. Demo data: any UAE mobile (5X XXX XXXX), OTP{" "}
+          <strong className="font-semibold text-gray-12">{MOCK_OTP_CODE}</strong>, promo code{" "}
+          <strong className="font-semibold text-gray-12">{MOCK_PROMO_CODE}</strong> (optional).
+        </p>
+      </div>
 
       {FLOWS.map((flow) => (
         <section key={flow.id} className="flex flex-col gap-2">

@@ -31,7 +31,7 @@ const STEPS: StepperStep[] = [
 export function DocumentsVerifiedScreen() {
   return (
     <Screen
-      background="/application/step-status-background.svg"
+      background="/shared/status-background.svg"
       header={
         <header className="flex shrink-0 flex-col items-start gap-4 p-6">
           <BrandLogo />

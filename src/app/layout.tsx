@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Sora } from "next/font/google";
+import { Manrope, Plus_Jakarta_Sans, Sora } from "next/font/google";
 import { MobileShell } from "@/components/layout/MobileShell";
 import "./globals.css";
 
@@ -10,6 +10,11 @@ const sora = Sora({
 
 const manrope = Manrope({
   variable: "--font-manrope",
+  subsets: ["latin"],
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
 });
 
@@ -27,7 +32,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${sora.variable} ${manrope.variable} h-full antialiased`}>
+    <html lang="en" className={`${sora.variable} ${manrope.variable} ${plusJakartaSans.variable} h-full antialiased`}>
       <body>
         <MobileShell>{children}</MobileShell>
       </body>

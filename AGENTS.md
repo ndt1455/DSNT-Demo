@@ -33,7 +33,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | UI        | React 19, Tailwind CSS v4 (CSS-first `@theme` tokens, no tailwind.config) |
 | State     | Zustand (`src/stores`) for cross-screen state; `useState` for local       |
 | Icons     | `lucide-react` (unless Figma has a custom icon → export SVG)              |
-| Fonts     | Sora (body/headings), Manrope (buttons) via `next/font/google`            |
+| Fonts     | Sora (body), Manrope (buttons), Plus Jakarta Sans (tabs) — `next/font`    |
 | Lint/fmt  | ESLint (`eslint-config-next`) + Prettier (+ tailwind class sorting)       |
 | Deploy    | Vercel — preview deploy per branch, production = `main`                   |
 | Node      | >= 20.9, npm (commit `package-lock.json`; don't use yarn/pnpm/bun)        |
@@ -61,14 +61,15 @@ src/
     page.tsx              # Demo hub: list of all screens + status (reads src/config/screens.ts)
     globals.css           # Design tokens (@theme) — the ONLY place for colors/type scale
   components/
-    layout/               # MobileShell (phone frame), StatusBar
-    ui/                   # Shared primitives used by 2+ features (Button, Input, Checkbox, …)
+    layout/               # MobileShell (phone frame), StatusBar, Screen (standard screen anatomy)
+    ui/                   # Shared primitives: Button, InputField, ScreenHeader, ProgressBar, StepperVertical, …
   features/<feature>/     # Screens + feature-only components/hooks (see src/features/README.md)
   config/screens.ts       # Route ↔ Figma node registry + build status
   lib/mock/               # Mock services (OTP, products, identity) — the only "backend"
   lib/utils/              # cn() and small helpers
   stores/                 # Zustand stores (application journey state)
 public/mock/              # Sample images for camera fallbacks (EID front/back, selfie)
+public/<feature>/         # Figma-exported art per feature; public/shared/ for assets used by shared components
 ```
 
 Routes (keep in sync with `src/config/screens.ts`):
@@ -93,11 +94,13 @@ Routes (keep in sync with `src/config/screens.ts`):
 
 - Design frames are **iPhone 375 × 812**. Build every screen for a 375px-wide viewport.
 - `MobileShell` (in the root layout) handles the frame: full screen on phones, centered phone frame with a fake status bar on desktop. **Never** set page-level widths, never put a second frame inside a screen, never rely on `<body>` scrolling.
-- Screen anatomy from Figma — reuse it:
-  - Header (72px): back arrow, small caption ("Set up profile" / "Verify Identity") + title, kebab menu.
-  - Progress bar (4px) at the very top of step screens.
+- Screen anatomy from Figma — reuse it via `<Screen>` (`src/components/layout/Screen.tsx`):
+  - Header (72px): `<ScreenHeader>` — back arrow, small caption ("Set up profile" / "Verify Identity") + title, kebab menu (opens the demo hub until a menu is designed).
+  - Progress bar (4px) at the very top of step screens: `<Screen progress={0.25}>`.
   - Content with 24px horizontal padding (`px-screen-x`).
-  - Bottom bar pinned to the bottom: 24px padding, CTA 56px tall (`<Button>`).
+  - Bottom bar pinned to the bottom: `<Screen footer>` adds the 24px padding; CTA 56px tall (`<Button>`, or `buttonClasses()` on a `next/link`).
+- The desktop status bar overlays the screen; `<Screen>` draws its background under it like Figma. Dark full-bleed screens set `data-status-bar="light"` on their root for white status bar text.
+- Persisted store values (sessionStorage) differ between server and client render: gate them with `useHasHydrated()` (`src/stores`) before rendering or redirecting on them.
 - Touch first: tap targets >= 44px, no hover-only interactions, use `active:` states.
 - Camera screens (`/verify/id/*`, `/verify/selfie/camera`) may use `navigator.mediaDevices.getUserMedia`, but **must** work without a camera (permission denied / desktop without webcam) by using the images in `public/mock/`. Never upload or store captured images anywhere — keep them in memory only.
 - Don't use browser-only APIs during render (`window`, `sessionStorage`, …); use them in effects/handlers in `"use client"` components.

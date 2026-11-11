@@ -24,7 +24,7 @@ type ScreenHeaderProps = {
 
 /**
  * Figma component: "Header" (72px) — back arrow, caption + title, kebab menu.
- * The kebab menu has no design yet; it opens the demo hub so testers can jump between screens.
+ * The kebab menu has no design yet; it opens the demo hub so testers can restart the journey.
  */
 export function ScreenHeader({ caption, title, backHref, theme = "light" }: ScreenHeaderProps) {
   const t = themes[theme];

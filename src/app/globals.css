@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens — mirrored from Figma "Demo-DSNT" variables.
+ * Figma: https://www.figma.com/design/dcN7QgL7L0HSpOuKC9UZA2/Demo-DSNT
+ *
+ * Rules:
+ * - Use these tokens (e.g. `bg-brand-9`, `text-gray-11`, `text-p-sm`) instead of raw hex values.
+ * - When Figma adds/changes a variable, update it HERE first, then use it.
+ * - Figma name → token: "Blue-Primary/9" → brand-9, "Gray/11" → gray-11, "Teal/10" → success-10.
+ */
+@theme {
+  /* Brand (Figma: Blue-Primary/*) */
+  --color-brand-1: #fafcff;
+  --color-brand-2: #f3f7ff;
+  --color-brand-4: #dce8ff;
+  --color-brand-9: #0059ff;
+  --color-brand-12: #00286b;
+
+  /* Brand alpha (Figma: Blue-Alpha/*) */
+  --color-brand-a1: #0569ff05;
+  --color-brand-a3: #0257ff18;
+  --color-brand-a5: #015bff30;
+
+  /* Neutral (Figma: Gray/*) */
+  --color-gray-2: #f8f9fb;
+  --color-gray-4: #e6e8eb;
+  --color-gray-6: #d5d7dd;
+  --color-gray-8: #b7bbc4;
+  --color-gray-9: #787f8c;
+  --color-gray-10: #6f7682;
+  --color-gray-11: #4f545d;
+  --color-gray-12: #07080a;
+
+  /* Neutral alpha (Figma: Gray-Alpha/*) */
+  --color-gray-a1: #0544c104;
+  --color-gray-a2: #05297007;
+
+  /* Status (Figma: Teal/*) */
+  --color-success-10: #0fc271;
+
+  /* Semantic aliases (Figma: Labels/*, Icon/*, button/*, input/*) */
+  --color-label-primary: #000000;
+  --color-icon-primary: #121926;
+  --color-input-bg: #ffffff;
+  --color-input-border: var(--color-gray-6);
+  --color-button-primary-bg: var(--color-gray-12);
+  --color-button-primary-text: #ffffff;
+  --color-camera-bg: var(--color-brand-12);
+
+  /* Typography — families (loaded in src/app/layout.tsx) */
+  --font-sans: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-button: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  /* Typography — sizes (Figma: Heading/*, Paragraph/*) */
+  --text-h5: 24px;
+  --text-h5--line-height: 32px;
+  --text-h6: 20px;
+  --text-h6--line-height: 28px;
+  --text-p-lg: 18px;
+  --text-p-lg--line-height: 32px;
+  --text-p-md: 16px;
+  --text-p-md--line-height: 28px;
+  --text-p-sm: 14px;
+  --text-p-sm--line-height: 24px;
+  --text-p-xs: 12px;
+  --text-p-xs--line-height: 20px;
+  /* Figma: "Mobile / Bold / Size :14" (Manrope Bold) */
+  --text-button: 14px;
+  --text-button--line-height: 24px;
+  --text-button--letter-spacing: 0.2px;
+
+  /* Mobile frame (Figma frames are iPhone 375 x 812) */
+  --spacing-screen-x: 24px;
+  --width-device: 375px;
+  --height-device: 812px;
+}
+
+/* Hide scrollbars inside the device frame (phones don't show a desktop scrollbar). */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--color-gray-4);
+  color: var(--color-gray-12);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}

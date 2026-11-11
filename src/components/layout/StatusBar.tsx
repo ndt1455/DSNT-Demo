@@ -7,7 +7,7 @@ export function StatusBar({ className }: { className?: string }) {
     <div
       aria-hidden
       className={cn(
-        "h-[50px] shrink-0 items-center justify-between px-8 pt-1 text-[15px] font-semibold text-black",
+        "h-[50px] shrink-0 items-center justify-between px-8 pt-1 text-[15px] font-semibold text-black group-has-[[data-status-bar=light]]/device:text-white",
         className,
       )}
     >

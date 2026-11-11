@@ -16,22 +16,23 @@ const variants: Record<Variant, string> = {
   link: "bg-transparent text-brand-9 disabled:text-gray-8",
 };
 
+type ButtonStyleOptions = { variant?: Variant; fullWidth?: boolean; className?: string };
+
+/** Button look for non-button elements, e.g. a `next/link` that navigates to the next screen. */
+export function buttonClasses({ variant = "primary", fullWidth = true, className }: ButtonStyleOptions = {}) {
+  return cn(
+    "inline-flex h-14 items-center justify-center rounded-full px-6 font-button text-button font-bold transition-opacity active:opacity-80 disabled:cursor-not-allowed",
+    fullWidth && "w-full",
+    variants[variant],
+    className,
+  );
+}
+
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: Variant;
   fullWidth?: boolean;
 };
 
-export function Button({ variant = "primary", fullWidth = true, className, type = "button", ...props }: ButtonProps) {
-  return (
-    <button
-      type={type}
-      className={cn(
-        "inline-flex h-14 items-center justify-center rounded-full px-6 font-button text-button font-bold transition-opacity active:opacity-80 disabled:cursor-not-allowed",
-        fullWidth && "w-full",
-        variants[variant],
-        className,
-      )}
-      {...props}
-    />
-  );
+export function Button({ variant, fullWidth, className, type = "button", ...props }: ButtonProps) {
+  return <button type={type} className={buttonClasses({ variant, fullWidth, className })} {...props} />;
 }

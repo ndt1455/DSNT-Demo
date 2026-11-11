@@ -36,23 +36,55 @@
   --color-gray-a1: #0544c104;
   --color-gray-a2: #05297007;
 
-  /* Status (Figma: Teal/*) */
+  /* Status (Figma: Teal/*, Teal-Alpha/*) */
   --color-success-10: #0fc271;
+  --color-success-a10: #00be68f0;
+
+  /* Error text — no Figma variable yet (no error states designed); Radix red-11 style */
+  --color-danger-11: #ce2c31;
 
   /* Semantic aliases (Figma: Labels/*, Icon/*, button/*, input/*) */
   --color-label-primary: #000000;
   --color-icon-primary: #121926;
   --color-input-bg: #ffffff;
-  --color-input-border: var(--color-gray-6);
+  /* Figma: Gray/300 */
+  --color-input-border: #d2d6db;
   --color-button-primary-bg: var(--color-gray-12);
   --color-button-primary-text: #ffffff;
   --color-camera-bg: var(--color-brand-12);
 
+  /*
+   * Raw fills used in Figma components (not bound to variables there):
+   * logo / checkbox / tab / SwipeSlider gradients, Accer wordmark, OTP header, Toggle, Toast, splash.
+   */
+  --color-brand-grad-from: #2e7cf6;
+  --color-brand-grad-to: #5b9bff;
+  --color-brand-light: #76a6ff;
+  --color-brand-ink: #0f1d35;
+  --color-brand-muted: #7a9cc6;
+  --color-knob-to: #f0f4fa;
+  --color-toggle-off: #d4dee8;
+  --color-toast-from: #0558ff1a;
+  --color-toast-to: #05e6ff0d;
+  --color-splash-1: #004ed1;
+  --color-splash-2: #003ba3;
+  --color-splash-3: #002974;
+
+  /* Elevation (Figma effects) */
+  --shadow-card: 0 2px 8px 0 rgb(0 0 0 / 0.04);
+  --shadow-swipe: 0 6px 24px 0 rgb(46 124 246 / 0.2);
+  --shadow-toggle-knob: 0 1px 4px 0 rgb(0 0 0 / 0.12);
+  --drop-shadow-swipe-knob: 0 2px 6px rgb(46 124 246 / 0.35);
+
   /* Typography — families (loaded in src/app/layout.tsx) */
   --font-sans: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
   --font-button: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  /* Figma "Tab button" text */
+  --font-jakarta: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
 
   /* Typography — sizes (Figma: Heading/*, Paragraph/*) */
+  --text-p-xl: 20px;
+  --text-p-xl--line-height: 36px;
   --text-h5: 24px;
   --text-h5--line-height: 32px;
   --text-h6: 20px;
@@ -69,6 +101,26 @@
   --text-button: 14px;
   --text-button--line-height: 24px;
   --text-button--letter-spacing: 0.2px;
+  /* Figma: "Mobile / Bold / Size :12" (Manrope Bold) — inline text buttons like "Resend" */
+  --text-button-sm: 12px;
+  --text-button-sm--line-height: 20px;
+  --text-button-sm--letter-spacing: 0.2px;
+  /* Accer wordmark (Sora Bold 17) and "Tab button" label (Plus Jakarta Sans SemiBold 13) */
+  --text-logo: 17px;
+  --text-logo--line-height: 25.5px;
+  --text-tab: 13px;
+  --text-tab--line-height: 19.5px;
+
+  /* Light sweep across the SwipeSlider track (Figma: "Swipe Animation") */
+  --animate-swipe-shine: swipe-shine 2.4s ease-in-out infinite;
+  @keyframes swipe-shine {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(250%);
+    }
+  }
 
   /* Mobile frame (Figma frames are iPhone 375 x 812) */
   --spacing-screen-x: 24px;

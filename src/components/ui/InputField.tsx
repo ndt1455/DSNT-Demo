@@ -3,7 +3,8 @@ import { cn } from "@/lib/utils/cn";
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   id: string;
-  label: string;
+  /** Visible label. Omit it only when Figma shows none, and pass `aria-label` instead. */
+  label?: string;
   /** Content before the input inside the box, e.g. a country code. */
   leading?: ReactNode;
   /** Shown under the field and linked via aria-describedby. */
@@ -19,9 +20,11 @@ export function InputField({ id, label, leading, error, className, ...inputProps
 
   return (
     <div className={cn("flex flex-col gap-2", className)}>
-      <label htmlFor={id} className="text-p-xs font-medium text-gray-12">
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={id} className="text-p-xs font-medium text-gray-12">
+          {label}
+        </label>
+      )}
       <div
         className={cn(
           "flex items-center gap-3 rounded-2xl border bg-input-bg focus-within:border-brand-9",

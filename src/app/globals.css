@@ -122,6 +122,22 @@
     }
   }
 
+  /* Verify identity (Flow 2): captured-photo frame (Figma: Teal/9) and the raw #2e7cf6 used for
+     viewfinder corners and icon badges */
+  --color-success-9: #18cd76;
+  --color-brand-accent: var(--color-brand-grad-from);
+
+  /* Scan line sweeping the viewfinder while the mock camera "takes" the photo */
+  --animate-scan-line: scan-line 1.2s ease-in-out infinite alternate;
+  @keyframes scan-line {
+    from {
+      top: 12%;
+    }
+    to {
+      top: 88%;
+    }
+  }
+
   /* Mobile frame (Figma frames are iPhone 375 x 812) */
   --spacing-screen-x: 24px;
   --width-device: 375px;

@@ -12,7 +12,7 @@ type Variant = "primary" | "inverse" | "link";
 
 const variants: Record<Variant, string> = {
   primary: "bg-button-primary-bg text-button-primary-text disabled:bg-gray-2 disabled:text-gray-8",
-  inverse: "bg-white text-brand-9 disabled:bg-white/40 disabled:text-white",
+  inverse: "border border-brand-9 bg-white text-brand-9 disabled:bg-white/40 disabled:text-white",
   link: "bg-transparent text-brand-9 disabled:text-gray-8",
 };
 

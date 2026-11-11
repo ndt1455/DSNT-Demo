@@ -9,8 +9,10 @@ type ScreenProps = {
   footer?: ReactNode;
   /** Completed fraction 0–1. Renders the Figma "Progress bar" at the very top of the device. */
   progress?: number;
-  /** Full-bleed background art (Figma "Background" instance). */
+  /** Full-bleed background art (Figma "Background" instance). Ignored for dark screens. */
   background?: string;
+  /** "dark" = camera screens: solid Blue-Primary/12 background and a white status bar. */
+  theme?: "light" | "dark";
   /** Classes for the scrollable content area. */
   className?: string;
   children: ReactNode;
@@ -31,16 +33,22 @@ export function Screen({
   footer,
   progress,
   background = "/shared/screen-background.svg",
+  theme = "light",
   className,
   children,
 }: ScreenProps) {
+  const dark = theme === "dark";
+
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
+    <div data-status-bar={dark ? "light" : undefined} className="flex min-h-0 flex-1 flex-col">
       {/* 100% 100% stretches the art like Figma's preserveAspectRatio="none" export. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-brand-2 bg-size-[100%_100%] bg-no-repeat"
-        style={{ backgroundImage: `url(${background})` }}
+        className={cn(
+          "pointer-events-none absolute inset-0",
+          dark ? "bg-camera-bg" : "bg-brand-2 bg-size-[100%_100%] bg-no-repeat",
+        )}
+        style={dark ? undefined : { backgroundImage: `url(${background})` }}
       />
       {progress !== undefined && <ProgressBar value={progress} className="absolute inset-x-0 top-0 z-10" />}
 

@@ -3,17 +3,22 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useApplicationStore } from "@/stores/application";
 
 const SPLASH_DURATION_MS = 2000;
 
 /** Figma "Loading Screen" (1:2387): blue radial gradient with two blurred light ellipses. */
 export function SplashScreen() {
   const router = useRouter();
+  const reset = useApplicationStore((s) => s.reset);
 
   useEffect(() => {
+    // Launching the app starts a new application, so a repeat demo run doesn't skip steps
+    // (or pre-fill forms) with the previous run's answers.
+    reset();
     const timer = setTimeout(() => router.replace("/products"), SPLASH_DURATION_MS);
     return () => clearTimeout(timer);
-  }, [router]);
+  }, [reset, router]);
 
   return (
     <div data-status-bar="light" className="flex flex-1 flex-col">

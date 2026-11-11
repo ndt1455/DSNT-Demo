@@ -16,8 +16,8 @@ type SideConfig = {
   hint: string;
   backHref: string;
   nextHref: string;
-  /** Earlier capture this side depends on, and where to send the user without it. */
-  requires: JourneyStep | null;
+  /** Earlier journey step this side depends on, and where to send the user without it. */
+  requires: JourneyStep;
   requiresRedirect: string;
   captured: { idFrontCaptured: true } | { idBackCaptured: true };
 };
@@ -28,8 +28,8 @@ const SIDES: Record<IdSide, SideConfig> = {
     hint: "Place front side of your EID in the frame and we’ll take the photo automatically",
     backHref: "/verify/promo",
     nextHref: "/verify/id/back",
-    requires: null,
-    requiresRedirect: "/verify/id",
+    requires: "otpVerified",
+    requiresRedirect: "/verify/otp",
     captured: { idFrontCaptured: true },
   },
   back: {

@@ -4,6 +4,7 @@ import { Screen } from "@/components/layout/Screen";
 import { buttonClasses } from "@/components/ui/Button";
 import { ScreenHeader } from "@/components/ui/ScreenHeader";
 import { InfoCard } from "./components/InfoCard";
+import { StepGuard } from "./components/StepGuard";
 import { TipsList } from "./components/TipsList";
 
 const TIPS = ["Ensure good lighting", "Avoid shadows and glare", "Keep all edges visible"];
@@ -21,6 +22,7 @@ export function ScanIdScreen() {
       }
       className="px-6 pt-6"
     >
+      <StepGuard requires="otpVerified" redirectTo="/verify/otp" />
       <InfoCard>
         <h2 className="text-p-lg font-medium text-brand-ink">Scan your ID</h2>
         <Image

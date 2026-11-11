@@ -11,6 +11,7 @@ import { applyPromoCode } from "@/lib/mock";
 import { useApplicationStore } from "@/stores/application";
 import { IconBadge } from "./components/IconBadge";
 import { InfoCard } from "./components/InfoCard";
+import { useRequiredStep } from "./hooks/useRequiredStep";
 
 const FORM_ID = "promo-code-form";
 const NEXT_SCREEN = "/verify/id/front";
@@ -19,6 +20,7 @@ const NEXT_SCREEN = "/verify/id/front";
 export function PromoCodeScreen() {
   const router = useRouter();
   const setState = useApplicationStore((s) => s.set);
+  useRequiredStep("otpVerified", "/verify/otp");
   const [code, setCode] = useState("");
   const [error, setError] = useState<string>();
   const [applying, setApplying] = useState(false);

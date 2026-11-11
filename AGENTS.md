@@ -58,7 +58,7 @@ npm run build        # production build — MUST pass before every PR
 src/
   app/                    # Routes only. page.tsx files stay thin: render a screen from src/features
     layout.tsx            # Fonts + <MobileShell>
-    page.tsx              # Demo hub: list of all screens + status (reads src/config/screens.ts)
+    page.tsx              # Demo hub: only a "Start the full journey" button (→ /splash)
     globals.css           # Design tokens (@theme) — the ONLY place for colors/type scale
   components/
     layout/               # MobileShell (phone frame), StatusBar, Screen (standard screen anatomy)

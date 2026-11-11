@@ -102,7 +102,7 @@ Routes (keep in sync with `src/config/screens.ts`):
 - The desktop status bar overlays the screen; `<Screen>` draws its background under it like Figma. Dark full-bleed screens set `data-status-bar="light"` on their root for white status bar text.
 - Persisted store values (sessionStorage) differ between server and client render: gate them with `useHasHydrated()` (`src/stores`) before rendering or redirecting on them.
 - Touch first: tap targets >= 44px, no hover-only interactions, use `active:` states.
-- Camera screens (`/verify/id/*`, `/verify/selfie/camera`) may use `navigator.mediaDevices.getUserMedia`, but **must** work without a camera (permission denied / desktop without webcam) by using the images in `public/mock/`. Never upload or store captured images anywhere — keep them in memory only.
+- Camera screens (`/verify/id/*`, `/verify/selfie/camera`) do **not** open the camera (team decision, 2026-11-11): they simulate the automatic capture (`useMockCapture` in `features/identity`) and show the sample images in `public/mock/`, so the demo looks the same on every device. They use `<Screen theme="dark">` + `<ScreenHeader theme="dark">` (white status bar, translucent header buttons).
 - Don't use browser-only APIs during render (`window`, `sessionStorage`, …); use them in effects/handlers in `"use client"` components.
 
 ## 6. Design implementation rules
